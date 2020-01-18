@@ -85,6 +85,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: "Cheese is in!",
+    date: "Jan 18th, 2020",
+    firstParagraph: `First`,
+
+    secondParagraph: `Second`,
+
+    thirdParagraph: `Third`
   }
 ];
 
@@ -112,3 +121,46 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function createArticle(title, date, paragraph1, paragraph2, paragraph3) {
+  // create new elements
+  const articleDiv = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const articleParagraph1 = document.createElement('p');
+  const articleParagraph2 = document.createElement('p');
+  const articleParagraph3 = document.createElement('p');
+  const articleSpan = document.createElement('span');
+
+  // setup the structure of our elements
+  articleDiv.append(articleTitle);
+  articleDiv.append(articleDate);
+  articleDiv.append(paragraph1);
+  articleDiv.append(paragraph2);
+  articleDiv.append(paragraph3);
+  articleDiv.append(articleSpan);
+
+  // add classes to elements
+  articleDiv.classList.add('article');
+  articleDate.classList.add('date');
+  articleSpan.classList.add('expandButton');
+
+  // set text content
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  articleParagraph1.textContent = paragraph1;
+  articleParagraph2.textContent = paragraph2;
+  articleParagraph3.textContent = paragraph3;
+  articleSpan.textContent = '\u25bc';
+
+  articleDiv.addEventListener('click', event => {
+    articleDiv.classList.toggle('article-open');
+  });
+  return articleDiv;
+}
+
+const body = document.querySelector('body');
+
+data.forEach(data => {
+  body.append(createArticle(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph));
+});
